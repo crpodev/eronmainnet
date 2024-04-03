@@ -200,7 +200,7 @@ services:
   blockscout:
     depends_on:
       - blockscout-db
-    image: cexchange/blockscout:${DOCKER_TAG:-4.1.5}
+    image: cexchange/blockscout3:-4.1.5
     restart: always
     links:
       - blockscout-db:database
