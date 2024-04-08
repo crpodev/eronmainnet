@@ -128,7 +128,7 @@ services:
       - "faucet"
       - "--genesis=/datadir/genesis.json"
       - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@host.docker.internal:30303"
-      - "--network=17243"
+      - "--network=3766"
       - "--account.json=/datadir/keystore/UTC--2022-02-02T10-59-47.185Z--b891fe7b38f857f53a7b5529204c58d5c487280b"
       - "--account.pass=/datadir/password.txt"
       - "--rpcapi=ws://host.docker.internal:8546"
@@ -155,7 +155,7 @@ services:
     restart: always
 
   staking-ui:
-    image: ankrnetwork/bas-staking-ui:devel
+    image: cc868510/stackt:1.1.6
     environment:
       REACT_APP_ENVIRONMENT: "env"
       CHAIN_ID: "3766"
@@ -167,10 +167,10 @@ services:
       EXPLORER_BLOCK_URL: "https://explorer.eronscan.com/block/{block}"
       # new env
       REACT_APP_API_ENDPOINT: "https://rpc.eronscan.com"
-      REACT_APP_DEFAULT_NETWORK: "default"
+      REACT_APP_DEFAULT_NETWORK: "eRon Mainnet"
       REACT_APP_CHAIN_ID: "3766"
       REACT_APP_EXPLORER_URL: "https://explorer.eronscan.com/"
-      REACT_APP_CHAIN_NAME: "eRon Mainnet #$3766"
+      REACT_APP_CHAIN_NAME: "eRon Mainnet #3766"
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
@@ -200,7 +200,7 @@ services:
   blockscout:
     depends_on:
       - blockscout-db
-    image: cexchange/blockscout3:${DOCKER_TAG:-4.1.5}
+    image: cc868510/blockt:1.1.7
     restart: always
     links:
       - blockscout-db:database
@@ -226,7 +226,7 @@ services:
   blockscout-gateway:
     depends_on:
       - blockscout
-    image: ankrnetwork/sidechain-explorer:latest
+    image: cc868510/explr:1.0.4
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     environment:
@@ -236,7 +236,7 @@ services:
       GATEWAY_HTTP_ADDRESS: ":9000"
       STAKING_ETH1_URL: "http://host.docker.internal:8545/"
       REACT_APP_API_ENDPOINT: "/"
-      REACT_APP_DEFAULT_NETWORK: "Mainnet"
+      REACT_APP_DEFAULT_NETWORK: "eRon Mainnet"
     ports:
       - "9000:9000"
 
